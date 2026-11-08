@@ -13,7 +13,7 @@ import {
 } from "lucide-react";
 
 const LOGO_URL =
-  "https://img.sanishtech.com/u/f3ddf342e2b7cf0466f311b49ba99122.png";
+  "https://img.sanishtech.com/u/adaba3c879878338339a1d48b5d9c3a4.png";
 
 const quickLinks = [
   { name: "Home", href: "#home" },
@@ -52,7 +52,6 @@ const services = [
 const Footer = () => {
   return (
     <footer className="relative w-full max-w-full overflow-hidden bg-[#10291F] text-[#F7F3E9]">
-
       {/* DECORATIVE BACKGROUND */}
       <div
         aria-hidden="true"
@@ -60,20 +59,16 @@ const Footer = () => {
       />
 
       <div className="relative mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-10">
-
         {/* TOP FOOTER */}
         <div className="grid gap-14 border-b border-white/15 py-16 lg:grid-cols-12 lg:gap-12 lg:py-20">
-
           {/* BRAND INFORMATION */}
           <div className="min-w-0 lg:col-span-5">
-
             <Link
               href="/#home"
               aria-label="URJI Coffee homepage"
               className="group inline-flex max-w-full items-center gap-4"
             >
               <span className="flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden rounded-full bg-white p-1 sm:h-16 sm:w-16">
-
                 <Image
                   src={LOGO_URL}
                   alt="URJI COFFEE logo"
@@ -84,11 +79,9 @@ const Footer = () => {
                   sizes="64px"
                   className="h-full w-full object-contain transition-transform duration-300 group-hover:scale-105"
                 />
-
               </span>
 
               <span className="flex min-w-0 flex-col">
-
                 <span className="break-words font-serif text-xl font-semibold tracking-[0.08em] text-[#F7F3E9] transition-colors group-hover:text-[#D5B46A] sm:text-2xl">
                   URJI COFFEE
                 </span>
@@ -96,7 +89,6 @@ const Footer = () => {
                 <span className="mt-1 text-[9px] tracking-[0.18em] text-[#D5B46A] sm:text-[10px] sm:tracking-[0.25em]">
                   ዑርጂ · FURI & SEBETA
                 </span>
-
               </span>
             </Link>
 
@@ -109,12 +101,10 @@ const Footer = () => {
             <p className="mt-7 font-serif text-2xl italic text-[#D5B46A]">
               Good coffee. Warm moments.
             </p>
-
           </div>
 
           {/* QUICK LINKS */}
           <div className="lg:col-span-3">
-
             <h3 className="mb-8 text-xs font-semibold uppercase tracking-[0.25em] text-[#D5B46A]">
               Explore
             </h3>
@@ -135,35 +125,29 @@ const Footer = () => {
                     size={13}
                     className="opacity-0 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:opacity-100"
                   />
-
                 </Link>
               ))}
             </nav>
-
           </div>
 
           {/* CONTACT INFORMATION */}
           <div className="lg:col-span-4">
-
             <h3 className="mb-8 text-xs font-semibold uppercase tracking-[0.25em] text-[#D5B46A]">
               Get in touch
             </h3>
 
             <div className="flex flex-col gap-6">
-
               {contactNumbers.map((contact) => (
                 <a
                   key={contact.number}
                   href={`tel:${contact.number}`}
                   className="group flex items-center gap-4"
                 >
-
                   <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-white/15 text-[#D5B46A] transition-all duration-300 group-hover:border-[#D5B46A] group-hover:bg-[#D5B46A] group-hover:text-[#183E30]">
                     <Phone size={17} />
                   </span>
 
                   <span className="flex min-w-0 flex-col gap-1">
-
                     <span className="text-[10px] uppercase tracking-[0.15em] text-[#F7F3E9]/50">
                       {contact.label}
                     </span>
@@ -171,37 +155,28 @@ const Footer = () => {
                     <span className="text-sm font-medium tracking-wide text-[#F7F3E9] transition-colors group-hover:text-[#D5B46A]">
                       {contact.display}
                     </span>
-
                   </span>
 
                   <ArrowUpRight
                     size={16}
                     className="ml-auto shrink-0 text-[#D5B46A] transition-transform group-hover:-translate-y-1 group-hover:translate-x-1"
                   />
-
                 </a>
               ))}
-
             </div>
-
           </div>
-
         </div>
 
         {/* BRANCHES AND SERVICES */}
         <div className="grid gap-12 border-b border-white/15 py-12 md:grid-cols-2">
-
           {/* LOCATIONS */}
           <div>
-
             <h3 className="mb-7 text-xs font-semibold uppercase tracking-[0.25em] text-[#D5B46A]">
               Find URJI COFFEE
             </h3>
 
             <div className="flex flex-wrap gap-x-10 gap-y-6">
-
               <div className="flex items-center gap-3">
-
                 <MapPin size={20} className="text-[#D5B46A]" />
 
                 <div>
@@ -210,11 +185,9 @@ const Footer = () => {
                     Ethiopia
                   </p>
                 </div>
-
               </div>
 
               <div className="flex items-center gap-3">
-
                 <MapPin size={20} className="text-[#D5B46A]" />
 
                 <div>
@@ -223,22 +196,17 @@ const Footer = () => {
                     Ethiopia
                   </p>
                 </div>
-
               </div>
-
             </div>
-
           </div>
 
           {/* SERVICES */}
           <div>
-
             <h3 className="mb-7 text-xs font-semibold uppercase tracking-[0.25em] text-[#D5B46A]">
               Our services
             </h3>
 
             <div className="flex flex-wrap gap-4">
-
               {services.map((service) => {
                 const Icon = service.icon;
 
@@ -252,16 +220,12 @@ const Footer = () => {
                   </div>
                 );
               })}
-
             </div>
-
           </div>
-
         </div>
 
         {/* FINAL FOOTER CTA */}
         <div className="flex flex-col items-center justify-between gap-6 border-b border-white/15 py-10 text-center sm:flex-row sm:text-left">
-
           <div>
             <p className="font-serif text-2xl">
               We&apos;d love to welcome you.
@@ -284,12 +248,10 @@ const Footer = () => {
               className="transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1"
             />
           </a>
-
         </div>
 
         {/* COPYRIGHT */}
         <div className="flex flex-col items-center justify-between gap-4 py-7 text-center sm:flex-row sm:text-left">
-
           <p className="text-xs text-[#F7F3E9]/50">
             © {new Date().getFullYear()} URJI COFFEE. All rights reserved.
           </p>
@@ -305,11 +267,8 @@ const Footer = () => {
           >
             Back to top ↑
           </Link>
-
         </div>
-
       </div>
-
     </footer>
   );
 };

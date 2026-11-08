@@ -13,7 +13,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 const LOGO_URL =
-  "https://img.sanishtech.com/u/f3ddf342e2b7cf0466f311b49ba99122.png";
+  "https://img.sanishtech.com/u/adaba3c879878338339a1d48b5d9c3a4.png";
 
 const navLinks = [
   { name: "Home", href: "#home" },
@@ -65,7 +65,6 @@ const Header = () => {
 
   return (
     <header className="fixed inset-x-0 top-0 z-[100] w-full">
-
       {/* MAIN HEADER */}
       <div
         className={`border-b transition-all duration-500 ${
@@ -75,7 +74,6 @@ const Header = () => {
         }`}
       >
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 md:px-10">
-
           {/* CLICKABLE URJI LOGO */}
           <Link
             href="/#home"
@@ -127,7 +125,6 @@ const Header = () => {
 
           {/* HEADER ACTIONS */}
           <div className="flex shrink-0 items-center gap-4">
-
             {/* PHONE ORDER BUTTON */}
             <a
               href="tel:0915879595"
@@ -176,7 +173,6 @@ const Header = () => {
                 )}
               </AnimatePresence>
             </button>
-
           </div>
         </div>
       </div>
@@ -233,11 +229,9 @@ const Header = () => {
             <p className="mt-8 text-[10px] uppercase tracking-[0.2em] text-[#F7F3E9]/60">
               Furi & Sebeta · Ethiopia
             </p>
-
           </motion.div>
         )}
       </AnimatePresence>
-
     </header>
   );
 };

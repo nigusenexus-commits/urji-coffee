@@ -11,8 +11,8 @@ import {
   Utensils,
 } from "lucide-react";
 
-const featuredImage =
-  "https://img.sanishtech.com/u/08ee631329437d20d1f5ed7b8105a5fb.jpg";
+  const featuredImage =
+  "https://img.sanishtech.com/u/6aa30431ab21b0dc3e9fefd2be195821.jpg";
 
 const categories = [
   {
