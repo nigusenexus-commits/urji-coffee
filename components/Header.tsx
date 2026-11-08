@@ -1,72 +1,243 @@
-/**
- * Header Component
- * 
- * The site header/navigation bar that appears at the top of every page.
- * Features:
- * - Logo linking to home page
- * - Hamburger menu button for mobile navigation
- * - Animated mobile menu with smooth transitions
- * - Uses Framer Motion for animation
- * - Absolute positioning to overlay content
- */
 
-"use client"; // Required for useState and event handlers
-import { useState } from "react";
-import { AnimatePresence } from "framer-motion"; // For exit animations
-import Image from "next/image"; // Next.js optimized image component
-import Link from "next/link"; // Next.js client-side navigation
-import Nav from "./Nav/Nav";
+"use client";
+
+import { useEffect, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import {
+  ArrowUpRight,
+  Menu,
+  PhoneCall,
+  X,
+} from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+
+const LOGO_URL =
+  "https://img.sanishtech.com/u/f3ddf342e2b7cf0466f311b49ba99122.png";
+
+const navLinks = [
+  { name: "Home", href: "#home" },
+  { name: "Menu", href: "#menu" },
+  { name: "Our Story", href: "#about" },
+];
 
 const Header = () => {
-  // State to track if mobile navigation menu is open/closed
   const [navActive, setNavActive] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  // Detect page scrolling.
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 30);
+    };
+
+    handleScroll();
+
+    window.addEventListener("scroll", handleScroll, {
+      passive: true,
+    });
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  // Close mobile navigation with Escape.
+  useEffect(() => {
+    if (!navActive) return;
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setNavActive(false);
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [navActive]);
+
+  const closeMenu = () => {
+    setNavActive(false);
+  };
 
   return (
-    // Absolute positioning: header overlays content, positioned 40px from top
-    // z-[60]: High z-index to ensure header stays above other content
-    <header className="absolute top-[40px] left-0 right-0 z-[60]">
-      <div className="container mx-auto">
-        <div className="flex justify-between items-center">
-          {/* Logo - Links to home page */}
+    <header className="fixed inset-x-0 top-0 z-[100] w-full">
+
+      {/* MAIN HEADER */}
+      <div
+        className={`border-b transition-all duration-500 ${
+          isScrolled
+            ? "border-white/10 bg-[#10291F]/95 py-3 shadow-lg backdrop-blur-xl"
+            : "border-transparent bg-gradient-to-b from-[#10291F]/70 to-transparent py-4"
+        }`}
+      >
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 md:px-10">
+
+          {/* CLICKABLE URJI LOGO */}
           <Link
-            href="/"
-            className="relative w-[100px] h-[40px] xl:w-[120px] xl:h-[40px] z-[60]"
+            href="/#home"
+            onClick={closeMenu}
+            aria-label="URJI Coffee homepage"
+            className="group relative z-[110] flex min-w-0 items-center gap-3"
           >
-            {/* Next.js Image component with fill prop for responsive sizing */}
-            <Image src="/assets/logo.svg" fill alt="" className="object-contain" />
+            <span className="flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden rounded-full border border-white/50 bg-white shadow-lg transition-transform duration-300 group-hover:scale-105">
+              <Image
+                src={LOGO_URL}
+                alt="URJI COFFEE official logo"
+                width={56}
+                height={56}
+                unoptimized
+                priority
+                sizes="56px"
+                className="h-full w-full object-contain"
+              />
+            </span>
+
+            <span className="flex min-w-0 flex-col">
+              <span className="whitespace-nowrap font-serif text-xl font-semibold tracking-[0.08em] text-[#F7F3E9] transition-colors duration-300 group-hover:text-[#D5B46A] sm:text-2xl">
+                URJI COFFEE
+              </span>
+
+              <span className="mt-1 text-[9px] tracking-[0.18em] text-[#D5B46A] sm:text-[10px] sm:tracking-[0.22em]">
+                ዑርጂ · FURI & SEBETA
+              </span>
+            </span>
           </Link>
 
-          {/* Hamburger Menu Button - Animated 3-line to X transformation */}
-          <button
-            onClick={() => setNavActive(!navActive)} // Toggle menu state
-            className="w-8 h-6 text-accent relative flex items-center justify-center z-[60] outline-none"
-            aria-label="Toggle navigation menu" // Accessibility
+          {/* DESKTOP NAVIGATION */}
+          <nav
+            aria-label="Main navigation"
+            className="hidden items-center gap-10 md:flex"
           >
-            {/* Top line - rotates 45deg to form X when active */}
-            <span
-              className={`w-full h-[1.5px] bg-current absolute left-0 will-change-transform transition-transform duration-300 ${
-                navActive ? "top-1/2 rotate-45" : "top-0 translate-y-0"
-              }`}
-            ></span>
-            {/* Middle line - fades out when menu is active */}
-            <span
-              className={`w-full h-[1.5px] bg-current absolute left-0  transition-opacity duration-300 ${
-                navActive ? "opacity-0" : "top-1/2"
-              }`}
-            ></span>
-            {/* Bottom line - rotates -45deg to form X when active */}
-            <span
-              className={`w-full h-[1.5px] bg-current absolute left-0 will-change-transform transition-transform duration-300 ${
-                navActive ? "top-1/2 -rotate-45" : "bottom-0 translate-y-0"
-              }`}
-            ></span>
-          </button>
+            {navLinks.map((link) => (
+              <a
+                key={link.name}
+                href={link.href}
+                className="group relative py-2 text-[11px] font-medium uppercase tracking-[0.2em] text-[#F7F3E9]/85 transition-colors duration-300 hover:text-[#D5B46A]"
+              >
+                {link.name}
+
+                <span className="absolute bottom-0 left-0 h-px w-0 bg-[#D5B46A] transition-all duration-300 group-hover:w-full" />
+              </a>
+            ))}
+          </nav>
+
+          {/* HEADER ACTIONS */}
+          <div className="flex shrink-0 items-center gap-4">
+
+            {/* PHONE ORDER BUTTON */}
+            <a
+              href="tel:0915879595"
+              className="group hidden items-center gap-3 rounded-full border border-[#D5B46A]/60 px-5 py-3 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#F7F3E9] transition-all duration-300 hover:border-[#D5B46A] hover:bg-[#D5B46A] hover:text-[#183E30] sm:inline-flex"
+            >
+              <PhoneCall size={15} />
+
+              <span>Call to order</span>
+
+              <ArrowUpRight
+                size={14}
+                className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+              />
+            </a>
+
+            {/* MOBILE MENU BUTTON */}
+            <button
+              type="button"
+              onClick={() => setNavActive((previous) => !previous)}
+              aria-label={
+                navActive ? "Close navigation" : "Open navigation"
+              }
+              aria-expanded={navActive}
+              aria-controls="urji-mobile-navigation"
+              className="relative z-[110] flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-[#D5B46A]/60 text-[#F7F3E9] transition-all duration-300 hover:bg-[#D5B46A] hover:text-[#183E30] md:hidden"
+            >
+              <AnimatePresence mode="wait" initial={false}>
+                {navActive ? (
+                  <motion.span
+                    key="close"
+                    initial={{ opacity: 0, rotate: -90 }}
+                    animate={{ opacity: 1, rotate: 0 }}
+                    exit={{ opacity: 0, rotate: 90 }}
+                  >
+                    <X size={22} />
+                  </motion.span>
+                ) : (
+                  <motion.span
+                    key="menu"
+                    initial={{ opacity: 0, rotate: 90 }}
+                    animate={{ opacity: 1, rotate: 0 }}
+                    exit={{ opacity: 0, rotate: -90 }}
+                  >
+                    <Menu size={22} />
+                  </motion.span>
+                )}
+              </AnimatePresence>
+            </button>
+
+          </div>
         </div>
       </div>
 
-      {/* Navigation Menu - Conditionally rendered with AnimatePresence for exit animations */}
-      {/* mode="wait" ensures exit animation completes before enter animation */}
-      <AnimatePresence mode="wait">{navActive && <Nav />}</AnimatePresence>
+      {/* MOBILE NAVIGATION */}
+      <AnimatePresence>
+        {navActive && (
+          <motion.div
+            id="urji-mobile-navigation"
+            initial={{ opacity: 0, y: -15 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -15 }}
+            transition={{ duration: 0.3, ease: "easeOut" }}
+            className="absolute inset-x-0 top-full border-t border-white/10 bg-[#10291F]/98 px-7 pb-10 pt-8 shadow-2xl backdrop-blur-xl md:hidden"
+          >
+            <nav
+              aria-label="Mobile navigation"
+              className="flex flex-col"
+            >
+              {navLinks.map((link, index) => (
+                <motion.a
+                  key={link.name}
+                  href={link.href}
+                  onClick={closeMenu}
+                  initial={{ opacity: 0, x: -15 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{
+                    duration: 0.3,
+                    delay: index * 0.07,
+                  }}
+                  className="flex items-center justify-between border-b border-white/10 py-5 font-serif text-2xl text-[#F7F3E9] transition-colors duration-300 hover:text-[#D5B46A]"
+                >
+                  {link.name}
+
+                  <ArrowUpRight
+                    size={19}
+                    className="text-[#D5B46A]"
+                  />
+                </motion.a>
+              ))}
+            </nav>
+
+            {/* MOBILE PHONE BUTTON */}
+            <a
+              href="tel:0915879595"
+              onClick={closeMenu}
+              className="mt-8 flex min-h-[54px] items-center justify-center gap-3 rounded-full bg-[#D5B46A] px-6 text-sm font-semibold text-[#183E30] transition-colors duration-300 hover:bg-[#F0D79C]"
+            >
+              <PhoneCall size={17} />
+              Call to order: 0915 879 595
+            </a>
+
+            {/* BRANCH INFORMATION */}
+            <p className="mt-8 text-[10px] uppercase tracking-[0.2em] text-[#F7F3E9]/60">
+              Furi & Sebeta · Ethiopia
+            </p>
+
+          </motion.div>
+        )}
+      </AnimatePresence>
+
     </header>
   );
 };

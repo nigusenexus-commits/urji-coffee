@@ -1,71 +1,138 @@
-/**
- * Hero Component
- * 
- * The hero/banner section at the top of the homepage.
- * Features:
- * - Full-screen video background with autoplay
- * - Dark overlay for text readability
- * - Main headline and tagline
- * - Call-to-action button
- * - Parallax scrolling effect using Locomotive Scroll data attributes
- */
 
-"use client"; // Client component for video element
-
-import Badge from "./Badge";
-import Separator from "./Separator";
+"use client";
 
 const Hero = () => {
   return (
-    // Full viewport height section (80vh on mobile, full screen on xl)
-    <section className="h-[80vh] xl:h-screen relative text-white">
-      {/* Dark Overlay - Provides contrast for white text over video */}
-      {/* bg-hero_overlay: Background image from tailwind config */}
-      {/* bg-primary/[0.93]: Dark overlay with 93% opacity */}
-      <div className="bg-hero_overlay absolute w-full h-full z-10 bg-primary/[0.93]" />
-      
-      {/* Background Video - Autoplays, loops, and is muted (required for autoplay) */}
+    <section
+      id="home"
+      className="relative isolate flex min-h-[680px] h-[92svh] w-full items-center overflow-hidden bg-[#183E30] text-[#F7F3E9]"
+    >
+      {/* Background video */}
       <video
         autoPlay
         loop
         muted
-        playsInline // Prevents fullscreen on mobile
-        className="absolute top-0 left-0 w-full h-full object-cover"
+        playsInline
+        preload="metadata"
+        aria-hidden="true"
+        tabIndex={-1}
+        className="absolute inset-0 h-full w-full object-cover"
       >
-        <source src="/assets/hero/video.mp4" type="video/mp4" />
-        Your browser does not support the video tag.
+        <source
+          src="/assets/hero/video.mp4"
+          type="video/mp4"
+        />
       </video>
-      {/* Content Container - z-30 places content above overlay and video */}
-      <div className="container mx-auto h-full flex flex-col xl:flex-row items-center z-30 relative">
-        {/* Main Text Content with Parallax Effect */}
-        <div
-          data-scroll           // Locomotive Scroll attribute: enables scroll detection
-          data-scroll-speed="0.4" // Parallax speed: moves slower than scroll (0.4x speed)
-          className="flex-1 flex flex-col text-center justify-center items-center xl:pb-12 gap-10 h-full"
-        >
-          {/* Badge and Main Heading */}
-          <div className="flex flex-col items-center">
-            {/* Badge only shows on xl screens (hidden on mobile) */}
-            <Badge containerStyles="hidden xl:flex xl:w-[180px] xl:h-[180px]" />
-            {/* Main Hero Heading - "Coffee" is accented */}
-            <h1 className="h1 text-white">
-              <span className="text-accent">Coffee</span> & Joy
-            </h1>
+
+      {/* Cinematic dark overlay */}
+      <div className="absolute inset-0 bg-[#10291F]/65" />
+
+      {/* Premium gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-r from-[#10291F]/95 via-[#183E30]/80 to-[#183E30]/30" />
+
+      {/* Bottom gradient */}
+      <div className="absolute inset-0 bg-gradient-to-t from-[#10291F]/75 via-transparent to-[#10291F]/20" />
+
+      {/* Main content */}
+      <div className="container relative z-10 mx-auto flex h-full w-full items-center px-6 pt-24 md:px-12 lg:px-16">
+
+        <div className="max-w-4xl py-16">
+
+          {/* Location label */}
+          <div className="mb-8 flex items-center gap-4">
+
+            <span className="h-px w-10 bg-[#D5B46A]" />
+
+            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[#D5B46A] md:text-sm">
+              Furi & Sebeta · Ethiopia
+            </p>
+
           </div>
-          
-          {/* Decorative Separator Line */}
-          <Separator />
-          
-          {/* Hero Description Text - Responsive max-width */}
-          <p className="lead font-light max-w-[300px] md:max-w-[430px] xl:max-w-[560px] mb-4">
-            Experience the joy of exceptional coffee in our cozy space, where every cup is
-            crafted with passion and warmth
+
+          {/* Main heading */}
+          <h1 className="!text-[#F7F3E9] font-serif text-6xl font-normal leading-[1.08] tracking-[-0.04em] sm:text-7xl md:text-8xl lg:text-[104px]">
+
+            Good coffee.
+
+            <span className="mt-2 block !text-[#D5B46A] italic">
+              Warm moments.
+            </span>
+
+          </h1>
+
+          {/* Decorative line */}
+          <div className="my-8 h-px w-20 bg-[#D5B46A]/70" />
+
+          {/* Description */}
+          <p className="max-w-xl text-base font-light leading-8 !text-[#F7F3E9]/85 md:text-lg">
+
+            Discover exceptional coffee, refreshing drinks and
+            delicious food in a warm and welcoming atmosphere.
+            At Urji Coffee, every visit is a moment to enjoy.
+
           </p>
-          
-          {/* Call-to-Action Button */}
-          <button className="btn">Our menu</button>
+
+          {/* Action buttons */}
+          <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center">
+
+            {/* Menu button */}
+            <a
+              href="#menu"
+              className="group inline-flex min-h-[56px] items-center justify-center gap-4 rounded-full bg-[#D5B46A] px-9 py-4 text-sm font-semibold !text-[#183E30] transition-all duration-300 hover:-translate-y-1 hover:bg-[#F0D79C] hover:shadow-xl hover:shadow-black/20 focus:outline-none focus:ring-2 focus:ring-[#D5B46A] focus:ring-offset-2 focus:ring-offset-[#183E30]"
+            >
+              Explore our menu
+
+              <span className="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1">
+                ↗
+              </span>
+            </a>
+
+            {/* About button */}
+            <a
+              href="#about"
+              className="inline-flex min-h-[56px] items-center justify-center rounded-full border border-[#F7F3E9]/60 px-9 py-4 text-sm font-semibold !text-[#F7F3E9] transition-all duration-300 hover:-translate-y-1 hover:border-[#D5B46A] hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-white"
+            >
+              Discover Urji
+            </a>
+
+          </div>
+
+          {/* Branch information */}
+          <div className="mt-14 flex flex-wrap items-center gap-x-8 gap-y-3 text-xs font-medium uppercase tracking-[0.18em] !text-[#F7F3E9]/65">
+
+            <span className="flex items-center gap-2">
+              <span className="h-1.5 w-1.5 rounded-full bg-[#D5B46A]" />
+              Furi
+            </span>
+
+            <span className="flex items-center gap-2">
+              <span className="h-1.5 w-1.5 rounded-full bg-[#D5B46A]" />
+              Sebeta
+            </span>
+
+            <span className="hidden h-4 w-px bg-white/30 sm:block" />
+
+            <span>
+              Coffee · Food · Moments
+            </span>
+
+          </div>
+
         </div>
+
       </div>
+
+      {/* Scroll indicator */}
+      <div className="absolute bottom-8 right-8 z-10 hidden flex-col items-center gap-3 text-[#F7F3E9]/70 md:flex">
+
+        <span className="text-[10px] uppercase tracking-[0.25em]">
+          Scroll to explore
+        </span>
+
+        <div className="h-12 w-px bg-gradient-to-b from-[#D5B46A] to-transparent" />
+
+      </div>
+
     </section>
   );
 };

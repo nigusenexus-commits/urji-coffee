@@ -1,22 +1,14 @@
+
 /**
  * Next.js Configuration
- * 
- * Configuration file for Next.js framework.
- * Currently using default settings, but can be extended for:
- * - Image optimization settings
- * - Environment variables
- * - Webpack customization
- * - Output settings
- * - Experimental features
- * 
+ *
+ * Configuration file for the URJI COFFEE website.
+ *
  * @type {import('next').NextConfig}
  */
 const nextConfig = {
-  // Configuration options can be added here as needed
-  // Examples:
-  // images: { domains: ['example.com'] },
-  // env: { CUSTOM_KEY: 'value' },
-  // experimental: { appDir: true },
+  // Hide the Next.js development indicator (the black N button).
+  devIndicators: false,
 };
 
 export default nextConfig;
