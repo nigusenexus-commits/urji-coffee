@@ -11,8 +11,7 @@ import {
   Utensils,
 } from "lucide-react";
 
-  const featuredImage =
-  "https://img.sanishtech.com/u/6aa30431ab21b0dc3e9fefd2be195821.jpg";
+const featuredImage = "/images/urji-food.jpg";
 
 const categories = [
   {
@@ -72,7 +71,6 @@ const Explore = () => {
       className="relative w-full max-w-full overflow-hidden bg-[#F7F3E9] px-5 py-20 text-[#183E30] sm:px-8 sm:py-24 lg:px-10 lg:py-32"
     >
       <div className="mx-auto w-full max-w-7xl min-w-0">
-
         {/* SECTION INTRODUCTION */}
         <motion.div
           initial={{ opacity: 0, y: 35 }}
@@ -111,7 +109,7 @@ const Explore = () => {
           <div className="relative min-h-[300px] min-w-0 overflow-hidden sm:min-h-[450px] lg:min-h-[520px]">
             <Image
               src={featuredImage}
-              alt="A table filled with food, fresh drinks and dishes"
+              alt="Ethiopian food and coffee at a welcoming cafe table"
               fill
               unoptimized
               sizes="(max-width: 1024px) 100vw, 50vw"
@@ -298,7 +296,6 @@ const Explore = () => {
             />
           </a>
         </motion.div>
-
       </div>
     </section>
   );

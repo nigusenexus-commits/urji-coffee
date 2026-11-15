@@ -12,8 +12,7 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 
-const LOGO_URL =
-  "https://img.sanishtech.com/u/adaba3c879878338339a1d48b5d9c3a4.png";
+const LOGO_URL = "/images/urji-logo.png";
 
 const navLinks = [
   { name: "Home", href: "#home" },
